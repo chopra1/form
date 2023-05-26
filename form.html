@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Bootstrap Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+
+<body style="background-color: gainsboro">
+        
+    <h2 style="margin-bottom: 1rem; text-align: center; background-color: hsl(0, 10%, 16%); color: aliceblue;">User Sign Up Form</h2>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous">
+    </script>
+
+    <div class="container">
+        <h3 style=" color: rgb(8, 8, 8); background-color: hsl(192, 49%, 61%); text-align: center;">Created with Bootstrap</h3>
+
+        <form id="myForm" class="needs-validation was-validated" autocomplete="off">
+            <div class="col-sm-auto">
+                <input class="form-control" type="file" id="input" onchange="showDelBtn()"/><br />
+                <img src="default-avatar.png" id="uploaded-image" style=" margin-bottom: 1rem; width: 150px; height: 150px; display: block; margin-left: auto; margin-right: auto;"/><br />
+                <button type="button" id="delete" class="btn btn-danger" style="display: none; margin: auto" onclick="del()">Delete</button><br /><br />
+            </div>
+
+            <div class="form-group row">
+                <label style="color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger;" for="fname" class="col-sm-2 col-form-label">First Name:</label>
+                <div class="col-sm-3">
+                    <input type="text" id="fname" name="fname" aria-label="First Name" maxlength="10" class="form-control" placeholder="Enter First Name" required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please add a first name.</div>
+                </div>
+                <label style="color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger;" for="lname" class="col-sm-2 col-form-label">Last Name:</label>
+                <div class="col-sm-3">
+                    <input type="text" id="lname" name="lname" aria-label="Last name" maxlength="10" class="form-control" placeholder="Enter last Name" required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please add a last name.</div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label style="color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger;" for="mobile" class="col-sm-2 col-form-label">Mobile Number:</label>
+                <div class="col-sm-3">
+                    <input type="tel" class="form-control" id="mobile" minlength="12" maxlength="12" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" placeholder="012-3456-789" required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please add a mobile number in the given format.</div>
+                </div>
+                <div class="col-auto">
+                    <span id="instruction" class="form-text">Format: 012-3456-789</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label style=" color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger;" for="email" class="col-sm-2 col-form-label">Email Address:</label>
+                <div class="col-sm-3">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required/>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please add a valid email.</div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label style="color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger" for="emailPassword" class="col-sm-2 col-form-label">Password:</label>
+                <div class="col-sm-3">
+                    <input type="password" id="password" class="form-control" aria-labelledby="passwordguide" minlength="8" required/>
+                    <span class="form-text"><input type="checkbox" onclick="viewPassword()">Show Password</span> 
+                    <div class="col-auto">
+                        <span id="passwordGuide" class="form-text">
+                            Your password must be 8 characters long. It must contains combination of capital and small letters with numbers and special characters i.e. #@$*.. and must not contain spaces.
+                        </span>
+                    </div>
+                </div>
+                <label style="color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger;" for="emailPassword" class="col-sm-2 col-form-label">Confirm Password:</label>
+                <div class="col-sm-3">
+                    <input type="password" id="confirmPassword" class="form-control" aria-labelledby="passwordguide2" minlength="8" required/>
+                    <span class="form-text"><input type="checkbox" onclick="showPassword()">Show Password</span> 
+                    <div class="col-auto">
+                        <span id="passwordGuide2" class="form-text">Write the same password to validate.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label style="color: rgb(30, 63, 63); font-weight: bolder; text-decoration: double; margin-left: 10px; font-size: larger;" for="address" class="col-sm-2 col-form-label">Address:</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="address" rows="2" maxlength="100" placeholder="House no., Street, Area, City..." required></textarea>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please add your residential address.</div>
+                </div>
+            </div>
+
+            <div style="text-align: center" class="sticky-sm bottom">
+                <button style="margin-bottom: 7rem" type="submit" class="btn btn-primary" id="submission">Submit</button>
+                <button style="margin-left: 2rem; margin-bottom: 7rem" type="reset" class="btn btn-primary">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <input type="search" id="search" placeholder="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+    </div>
+
+    <select id="mySelect">
+        <option value="10" selected>10 rows</option>
+        <option value="25">25 rows</option>
+        <option value="50">50 rows</option>
+    </select>
+
+    <!-- Default dropstart button -->
+    
+
+    <div>
+        <table class="table table-success table-striped table-hover table-bordered border-dark" id="table">
+        <thead class="table-light">
+            <tr>
+            <th scope="col" onclick="sortTable()">First Name  <i class="fa fa-sort" style="color: blue; font-size: 14px; margin:auto"></i></th>
+            <th scope="col" onclick="sortTable()">Last Name <i class="fa fa-sort" style="color: blue; font-size: 14px; margin:auto"></i></th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col" onclick="sortTable()">Email <i class="fa fa-sort" style="color: blue; font-size: 14px; margin:auto"></i></th>
+            <th scope="col">Password</th>
+            <th scope="col" onclick="sortTable()">Address <i class="fa fa-sort" style="color: blue; font-size: 14px; margin:auto"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--JS code-->
+        </tbody>
+        </table>
+    </div>
+
+    <div id="pagination"></div>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>

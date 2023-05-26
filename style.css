@@ -1,0 +1,35 @@
+img {
+    border-radius: 50%;
+}
+
+#myForm {
+    border: 1px solid black;
+    background-color: rgb(196, 185, 185);
+    padding: 0%;
+    margin: 0px;
+}
+
+#container {
+    background-color: rgb(192, 176, 176);
+}
+
+#search {
+    padding: 6px;
+    background-color:rgb(246, 244, 226);
+    margin-top: 3rem;
+    margin-left: 7rem;
+}
+
+#mySelect {
+    padding: 8px;
+    background-color: cadetblue;
+    color: white;
+    margin-left: 7rem;
+    margin-top: 3rem;
+}
+
+table {
+    margin-top: 5rem;
+    margin-right:auto;
+    margin-left: auto;
+} 
