@@ -125,179 +125,176 @@ localStorage.setItem('formData', JSON.stringify(formData));
 }
 
 //Builds the data from the submitted form data
-function tableBuilder(){
+function tableBuilder(page=1){
     const table = document.getElementById('table');
     const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+    const rowsPerPage = 5;
 
 //    table.tBodies[0].innerHTML = "";
-    table.tBodies[0].innerHTML = "";
+    table.innerHTML = "";
 
+    const startIndex = (page-1)*rowsPerPage;
+    const endIndex = startIndex+rowsPerPage;
+    const rawData = storedData.slice(startIndex, endIndex);
 
-    storedData.forEach(function(data){
+    //create and append new data row with the stored form data.
+    for(let i=0; i<rawData.length; i++){
         const row = document.createElement('tr');
+
         const fnameCell = document.createElement('td');
-        const lnameCell = document.createElement('td');
-        const mobileCell = document.createElement('td');
-        const emailCell = document.createElement('td');
-        const passwordCell = document.createElement('td');
-        const addressCell = document.createElement('td');
-
-        fnameCell.textContent = data.firstName;
-        lnameCell.textContent = data.lastName;
-        mobileCell.textContent = data.mobile;
-        emailCell.textContent = data.email;
-        passwordCell.textContent = data.password;
-        addressCell.textContent = data.address;
-
+        fnameCell.textContent = rawData[i].firstName;
         row.appendChild(fnameCell);
+        
+        const lnameCell = document.createElement('td');
+        lnameCell.textContent = rawData[i].lastName;
         row.appendChild(lnameCell);
+
+        const mobileCell = document.createElement('td');
+        mobileCell.textContent = rawData[i].mobile;
         row.appendChild(mobileCell);
+
+        const emailCell = document.createElement('td');
+        emailCell.textContent = rawData[i].email;
         row.appendChild(emailCell);
+
+        const passwordCell = document.createElement('td');
+        passwordCell.textContent = rawData[i].password;
         row.appendChild(passwordCell);
+
+        const addressCell = document.createElement('td');
+        addressCell.textContent = rawData[i].address;
         row.appendChild(addressCell);
 
-        table.tBodies[0].appendChild(row);
-    })
-}
+        const editCell = document.createElement('td');
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.addEventListener('click', () => editFormData(rowData[i]))
+        editCell.appendChild(editButton);  
+        row.appendChild(editCell);
+
+        const deleteCell = document.createElement('td');
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => deleteFormData(rowData[i]))
+        deleteCell.appendChild(deleteButton);
+        row.appendChild(deleteCell);
+        
+        table.appendChild(row);
+} }
+
+//function to edit form data
+ function editFormData(i) {
+    // const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+    // const data = storedData[index];
+    
+    // if (data) {
+    //   const form = document.getElementById('myForm');
+    //   form.elements['fname'].value = data.firstName;
+    //   form.elements['lname'].value = data.lastName;
+    //   form.elements['mobile'].value = data.mobile;
+    //   form.elements['email'].value = data.email;
+    //   form.elements['password'].value = data.password;
+    //   form.elements['address'].value = data.address;
+      
+    //   // Remove the edited data from local storage
+    //   storedData.splice(index, 1);
+    //   localStorage.setItem('formData', JSON.stringify(storedData));
+      
+    //   // Update the table display
+    //   tableBuilder();
+    // }
+  }
+
+  // Function to delete form data
+  function deleteFormData(i) {
+    // const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+    
+    // // Remove the data from local storage
+    // storedData.splice(index, 1);
+    // alert('The selected data will be deleted');
+    // localStorage.setItem('formData', JSON.stringify(storedData));
+    
+    // // Update the table display
+    // tableBuilder();
+  }
 
 document.getElementById('myForm').addEventListener('submit', function(event){
     event.preventDefault();
     store();
-    tableBuilder();
-    //this.reset();
+    //tableBuilder();
+    this.reset();
 });
 
-tableBuilder()
-//initialize form id done
-//again add form inputs done
-//form submit id done
-//table id done
-
-//ternary operator
-
-//on submit event listener
-//prevent default
-//set item
-///create table
-
-//step-1 Define the required HTML id's 
-//const noteForm = document.getElementById("note-form"); //form id
-//const noteInput = document.getElementById("note-input"); //input we add in note
-//const noteSubmit = document.getElementById("note-submit"); //Add button
-//const notes = document.getElementById("notes"); //display submitted data in <ul> 
-//----------------------------------------------------------------------------------------------------------------
-//Ternary op - Read the item which is submitted through (localStorage.getItem(). if data available then convert JSON obj data into JS using JSON.parse() or array will remain empty. 
-//let notesStorage = localStorage.getItem("notes") ? JSON.parse(localStorage.getItem("notes")) : []; // .length / .isEmpty()
-
-//noteForm.addEventListener("submit", (e) => {
-//  e.preventDefault(); //preventDefault will look that the form field should not empty
-//  notesStorage.push(noteInput.value); //push noteInput value in noteStorage
-//  localStorage.setItem("notes", JSON.stringify(notesStorage)); //Set the data in local storage
-//  listBuilder(noteInput.value); //call a function listBuilder with attributes (noteInput.value)  (function hoisting)
-//  noteInput.value = ""; 
-//});
-//function of listBuilder
-      //const listBuilder = (text) => { //parameter is text (user input)
-        //const note = document.createElement("li");
-        //note.innerHTML = text + ' <button onclick="deleteNote(this)">x</button>'; //display the input text in HTML list format wiyj a delete btn
-        //notes.appendChild(note); //notes(<ul>) will add a child component note(<li>)
-      //};
-//--------------------------------------------------------------------------------------------------------------------------
-      //const getNotes = JSON.parse(localStorage.getItem("notes")); //for reading the data in local storage
-      //getNotes.forEach((note) => {  //forEach method is used to display each input of user
-      //listBuilder(note); //call listBuilder func to read the data in local storage 
-      //});
-      
-
-// const form = document.getElementById('myForm');
-// const firstNameInput = document.getElementById('fname').value;
-// const lastNameInput = document.getElementById('lname').value;
-// const mobile = document.getElementById('mobile').value;
-// const email = document.getElementById('email').value;
-// const password = document.getElementById('password').value;
-// const address = document.getElementById('address').value;
-// const formFieldsData = {firstNameInput, lastNameInput, mobile, email, password, address};
-// const formSubmit = document.getElementById('submission');
-// const table = document.querySelector('#table tbody');
-
-// let dataStorage = localStorage.getItem('formData')?JSON.parse(localStorage.getItem('formData')):[];
-
-//  form.addEventListener('submit', (e) => {
-//      e.preventDefault();
-//      dataStorage.push(firstNameInput.value);
-//      localStorage.setItem('formData', JSON.stringify(dataStorage));
-//      tableBuilder(firstNameInput.value);
-//      firstNameInput.value = " ";
-// })
-
-// function tableBuilder(){
-// const tableBody = document.querySelector('#table tbody');
-// table.innerHTML = '';
-//  loop through data and add rows to the table body
-//     for (let i = 0; i < firstNameInput.length; i++) {
-//         const row = table.insertRow();
-//         const cell1 = row.insertCell();
-//         const cell2 = row.insertCell();
-//         const cell3 = row.insertCell();
-//         const cell4 = row.insertCell();
-//         const cell5 = row.insertCell();
-//         const cell6 = row.insertCell();
-//         cell1.innerHTML = firstNameInput[i].firstNameInput;
-//         cell2.innerHTML = formFieldsData[i].lastNameInput;
-//         cell3.innerHTML = formFieldsData[i].mobile;
-//         cell4.innerHTML = formFieldsData[i].email;
-//         cell5.innerHTML = formFieldsData[i].password;
-//         cell6.innerHTML = formFieldsData[i].address;
-//     }
-// }
-
-//sorting of tableLayout
-
-//sorting of data
-function sortTable(column) {  //'column' is used to specify all columns    
-    //assign required parameters
-    var rows, switching, i, x, y, shouldSwitch, direction, switchcount = 0;
-    switching = true;
-    //Set the sorting direction to descending:
-    direction = "desc";
-    //loop that will continue until no switching has been done
-    while (switching) {
-      //A "While" Loop is used to repeat a specific block of code an unknown number of times, until a condition is met. 
+// Function to filter table data based on search input
+function filterTable() {
+  let currentPage  = 1;
+      const input = document.getElementById('search');
+      const filter = input.value.toLowerCase();
       const table = document.getElementById('table');
-      rows = table.tBodies[i].rows;
-  
-      for (i = 0; i < (rows.length - 1); i++) {
-        //Get the two elements you want to compare, one from current row and one from the next
-        x = rows[i].getElementsByTagName("td")[column];
-        y = rows[i + 1].getElementsByTagName("td")[column];
-        //check if the two rows should switch place, based on the direction of ascending or descending:
-        if (direction == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop.
-            shouldSwitch = true;
-            break;
-          }
-        } else if (direction == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop.
-            shouldSwitch = true;
+      const rows = table.getElementsByTagName('tr');
+      
+      for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let shouldDisplay = false;
+        
+        for (let j = 0; j < cells.length; j++) {
+          const cellText = cells[j].textContent.toLowerCase();
+          if (cellText.indexOf(filter) > -1) {
+            shouldDisplay = true;
             break;
           }
         }
-      }
-      if (shouldSwitch) {
-        //If a switch has been marked, make the switch and mark that a switch has been done:
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        //Each time a switch is done, increase this count by 1:
-        switchcount++;
-      } else {
-        //If no switching has been done AND the direction is "asc", set the direction to "desc" and run the while loop again.
-        if (switchcount == 0 && direction == "desc") {
-          direction = "asc";
-          switching = true;
-        }
+        
+        rows[i].style.display = shouldDisplay ? '' : 'none';
       }
     }
-  } //called in html 
-  
+    const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', filterTable);
+    tableBuilder()
+
+//pagination variables
+let currentPage = 1;
+const rowPerPage = 5;
+let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+let totalRows = storedData.length;
+let totalPages = Math.ceil(totalRows/rowPerPage);
+
+//function to generate page numbers
+function generatePageNumbers(){
+  const pageNumbers = document.getElementById('pageNumbers');
+  let numbersHTML = '';
+
+  for(let i=1; i<=totalPages; i++){
+    numbersHTML += `<button class='pageNumber' data-page="${i}">${i}</button>`;
+  }
+  pageNumbers.innerHTML = numbersHTML;
+
+  const pageNumberButtons = document.getElementsByClassName('pageNumber');
+  for(let i =0; i<pageNumberButtons.length; i++){
+    pageNumberButtons[i].addEventListener('click', function(){
+      currentPage = parseInt(this.getAttribute('data-page'))
+      tableBuilder(currentPage);
+    })
+  }
+}
+
+ // Event listener for previous page button
+ const prevPageButton = document.getElementById('prevPage');
+ prevPageButton.addEventListener('click', function() {
+   if (currentPage > 1) {
+     currentPage--;
+     tableBuilder(currentPage);
+   }
+ });
+ 
+ // Event listener for next page button
+ const nextPageButton = document.getElementById('nextPage');
+ nextPageButton.addEventListener('click', function() {
+   if (currentPage < totalPages) {
+     currentPage++;
+     tableBuilder(currentPage);
+   }
+ });
+
+ generatePageNumbers();
+ tableBuilder();
